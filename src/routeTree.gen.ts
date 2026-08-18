@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EmailRouteImport } from './routes/email'
+import { Route as NotesRouteImport } from './routes/notes'
+import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RecommendationsRouteImport } from './routes/recommendations'
 
@@ -22,6 +24,16 @@ const IndexRoute = IndexRouteImport.update({
 const EmailRoute = EmailRouteImport.update({
   id: '/email',
   path: '/email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesRoute = NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlannerRoute = PlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -38,12 +50,16 @@ const RecommendationsRoute = RecommendationsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/email': typeof EmailRoute
+  '/notes': typeof NotesRoute
+  '/planner': typeof PlannerRoute
   '/profile': typeof ProfileRoute
   '/recommendations': typeof RecommendationsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/email': typeof EmailRoute
+  '/notes': typeof NotesRoute
+  '/planner': typeof PlannerRoute
   '/profile': typeof ProfileRoute
   '/recommendations': typeof RecommendationsRoute
 }
@@ -51,20 +67,32 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/email': typeof EmailRoute
+  '/notes': typeof NotesRoute
+  '/planner': typeof PlannerRoute
   '/profile': typeof ProfileRoute
   '/recommendations': typeof RecommendationsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/email' | '/profile' | '/recommendations'
+  fullPaths:
+    '/' | '/email' | '/notes' | '/planner' | '/profile' | '/recommendations'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/email' | '/profile' | '/recommendations'
-  id: '__root__' | '/' | '/email' | '/profile' | '/recommendations'
+  to: '/' | '/email' | '/notes' | '/planner' | '/profile' | '/recommendations'
+  id:
+    | '__root__'
+    | '/'
+    | '/email'
+    | '/notes'
+    | '/planner'
+    | '/profile'
+    | '/recommendations'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EmailRoute: typeof EmailRoute
+  NotesRoute: typeof NotesRoute
+  PlannerRoute: typeof PlannerRoute
   ProfileRoute: typeof ProfileRoute
   RecommendationsRoute: typeof RecommendationsRoute
 }
@@ -83,6 +111,20 @@ declare module '@tanstack/react-router' {
       path: '/email'
       fullPath: '/email'
       preLoaderRoute: typeof EmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planner': {
+      id: '/planner'
+      path: '/planner'
+      fullPath: '/planner'
+      preLoaderRoute: typeof PlannerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -105,6 +147,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EmailRoute: EmailRoute,
+  NotesRoute: NotesRoute,
+  PlannerRoute: PlannerRoute,
   ProfileRoute: ProfileRoute,
   RecommendationsRoute: RecommendationsRoute,
 }
