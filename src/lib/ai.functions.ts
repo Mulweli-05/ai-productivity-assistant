@@ -23,7 +23,7 @@ export const askAI = createServerFn({ method: "POST" })
         "X-Lovable-AIG-SDK": "fetch",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash",
+        model: "google/gemini-3.7-flash",
         messages: [
           { role: "system", content: data.system },
           { role: "user", content: data.prompt },
