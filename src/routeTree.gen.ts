@@ -10,11 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as DeadlinesRouteImport } from './routes/deadlines'
 import { Route as EmailRouteImport } from './routes/email'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as PlannerRouteImport } from './routes/planner'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RecommendationsRouteImport } from './routes/recommendations'
 import { Route as ResearchRouteImport } from './routes/research'
@@ -23,6 +25,11 @@ import { Route as TrackerRouteImport } from './routes/tracker'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatRoute = ChatRouteImport.update({
@@ -50,6 +57,11 @@ const PlannerRoute = PlannerRouteImport.update({
   path: '/planner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -73,11 +85,13 @@ const TrackerRoute = TrackerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
   '/chat': typeof ChatRoute
   '/deadlines': typeof DeadlinesRoute
   '/email': typeof EmailRoute
   '/notes': typeof NotesRoute
   '/planner': typeof PlannerRoute
+  '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
   '/recommendations': typeof RecommendationsRoute
   '/research': typeof ResearchRoute
@@ -85,11 +99,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
   '/chat': typeof ChatRoute
   '/deadlines': typeof DeadlinesRoute
   '/email': typeof EmailRoute
   '/notes': typeof NotesRoute
   '/planner': typeof PlannerRoute
+  '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
   '/recommendations': typeof RecommendationsRoute
   '/research': typeof ResearchRoute
@@ -98,11 +114,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
   '/chat': typeof ChatRoute
   '/deadlines': typeof DeadlinesRoute
   '/email': typeof EmailRoute
   '/notes': typeof NotesRoute
   '/planner': typeof PlannerRoute
+  '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
   '/recommendations': typeof RecommendationsRoute
   '/research': typeof ResearchRoute
@@ -112,11 +130,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/analytics'
     | '/chat'
     | '/deadlines'
     | '/email'
     | '/notes'
     | '/planner'
+    | '/privacy'
     | '/profile'
     | '/recommendations'
     | '/research'
@@ -124,11 +144,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/analytics'
     | '/chat'
     | '/deadlines'
     | '/email'
     | '/notes'
     | '/planner'
+    | '/privacy'
     | '/profile'
     | '/recommendations'
     | '/research'
@@ -136,11 +158,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/analytics'
     | '/chat'
     | '/deadlines'
     | '/email'
     | '/notes'
     | '/planner'
+    | '/privacy'
     | '/profile'
     | '/recommendations'
     | '/research'
@@ -149,11 +173,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalyticsRoute: typeof AnalyticsRoute
   ChatRoute: typeof ChatRoute
   DeadlinesRoute: typeof DeadlinesRoute
   EmailRoute: typeof EmailRoute
   NotesRoute: typeof NotesRoute
   PlannerRoute: typeof PlannerRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProfileRoute: typeof ProfileRoute
   RecommendationsRoute: typeof RecommendationsRoute
   ResearchRoute: typeof ResearchRoute
@@ -167,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chat': {
@@ -204,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlannerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -237,11 +277,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalyticsRoute: AnalyticsRoute,
   ChatRoute: ChatRoute,
   DeadlinesRoute: DeadlinesRoute,
   EmailRoute: EmailRoute,
   NotesRoute: NotesRoute,
   PlannerRoute: PlannerRoute,
+  PrivacyRoute: PrivacyRoute,
   ProfileRoute: ProfileRoute,
   RecommendationsRoute: RecommendationsRoute,
   ResearchRoute: ResearchRoute,
